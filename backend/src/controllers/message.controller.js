@@ -14,6 +14,7 @@ export const getUsersForSidebar = async (req, res) => {
     }
 };
 
+// 1 to 1 messages
 export const getMessages = async (req, res) => {
     try {
         const {id: userToChatId } = req.params
@@ -31,4 +32,36 @@ export const getMessages = async (req, res) => {
         console.log("Error in getMessages controller", error.message);
         res.status(500).json({ error: "Internet server error "});
     }
-}
+};
+
+export const sendMessage = async (req, res) => {
+    try {
+        // setting the request
+        const { text, image } = req.body;
+        const { id: receiverId } = req.params; // renaming to receiverId for cleaner code
+        const senderId = req.user_id;
+
+        let imageUrl;
+        // Upload image to cloudinary if there is any
+        if (image) {
+            const uploadResponse = await cloudinary.uploader.upload(image);
+            imageUrl = uploadResponse.secure_url;
+        }
+
+        const newMessage = new Message ({
+            senderId,
+            receiverId,
+            text,
+            image: imageUrl // undefinted or actual value if uploaded
+        });
+
+        await newMessage.save();
+
+        // todo: realtime function with Socket.io
+
+        res.status(201).json(newMessage);
+    } catch (error) {
+        console.log("Error in sendMessage controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
