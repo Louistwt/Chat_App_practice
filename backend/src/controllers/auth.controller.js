@@ -4,10 +4,10 @@ import { generateToken } from "../lib/utils.js"
 import cloudinary from "../lib/cloudinary.js"
 
 export const signup = async (req, res) => {
-    const{fullName,email,password} = req.body
+    const{userName,email,password} = req.body
     try {
         // create user -> hash password -> create a token to authenticate
-        if(!fullName || !email || !password) {
+        if(!userName || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
         
@@ -16,17 +16,22 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "Password must be at least 6 characters" });
         }
 
-        //check for duplicate email
-        const user = await User.findOne({email})
+        //check for duplicate userName
+        const existingUserName = await User.findOne({ userName })
 
-        if (user) return res.status(400).json({ message: "Email already exists" });
+        if (existingUserName) return res.status(400).json({ message: "Username already exists" });
+        
+        //check for duplicate email
+        const existingEmail = await User.findOne({ email })
+
+        if (existingEmail) return res.status(400).json({ message: "Email already exists" });
 
         // hash password
         const salt = await bcrypt.genSalt(10) // 10 rounds of complexity
         const hashedPassword = await bcrypt.hash(password, salt)
 
         const newUser = new User ({
-            fullName,
+            userName,
             email,
             password: hashedPassword
         })
@@ -38,7 +43,7 @@ export const signup = async (req, res) => {
 
             res.status(201).json({
                 _id: newUser._id,
-                fullName: newUser.fullName,
+                userName: newUser.userName,
                 email: newUser.email,
                 profilePic: newUser.profilePic,
             });
@@ -70,7 +75,7 @@ export const login = async (req, res) => {
         generateToken(user._id,res)
         res.status(200).json({
             _id: user._id,
-            fullName: user.fullName,
+            userName: user.userName,
             email: user.email,
             profilePic: user.profilePic,
         });

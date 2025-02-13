@@ -16,9 +16,9 @@ const PORT = process.env.PORT; // using the PORT at .env
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-}))
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    credentials: true, // allow cookies and authentications to be sent as a request
+}));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
