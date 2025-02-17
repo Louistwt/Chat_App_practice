@@ -9,18 +9,16 @@ export const useAuthStore = create((set) => ({
     isSigningUp: false,
     isLoggingIn: false,
     isUpdatingProfile: false,
-    
     isCheckingAuth: true,
+    onlineUsers: [],
 
     checkAuth: async() => {
         try {
             const res = await axiosInstance.get("/auth/check"); // use backend to check auth
-
             set({ authUser: res.data });
 
         } catch (error) { // user is not authenticated
             console.log("Error in checkAuth: ", error);
-            
             set({ authUser: null });
             
         } finally {
@@ -62,7 +60,7 @@ export const useAuthStore = create((set) => ({
     logout: async() => {
         try {
             await axiosInstance.post("auth/logout");
-            set({ authUser: Null });
+            set({ authUser: null });
             toast.success("Logged out successfully");
 
         } catch (error) {
