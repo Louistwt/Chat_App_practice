@@ -25,6 +25,14 @@ app.use(cors({
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html")); // running everything in one port
+    })
+}
+
 // starting server
 server.listen(PORT, () => {
     console.log("server is running on PORT:" + PORT);

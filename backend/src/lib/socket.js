@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import http, { get } from "http";
+import http from "http";
 import express from "express";
 
 const app = express();
@@ -31,6 +31,7 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         console.log("A user disconnected", socket.id);
         delete userSocketMap[userId]; // delete this user in state
+        io.emit("getOnlineUsers", Object.keys(userSocketMap));
     })
 })
 
