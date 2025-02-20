@@ -1,5 +1,5 @@
-## Full stack real-time chat application
-### Features:
+# Full Stack Real-time Chat App
+## Features:
 
 - User authentication && authorisation with JWT
 - Real-time messaging using Socket.io
@@ -16,8 +16,8 @@
 ![DaisyUI](https://img.shields.io/badge/DaisyUI-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-
-Using the application
+---
+## Using the application
 ###### Setup .env file
 
 ```
@@ -42,5 +42,5 @@ npm run build
 npm start
 ```
 
-###### Acknowledgement:
+#### Acknowledgement:
 This project was inspired by: https://github.com/burakorkmez
