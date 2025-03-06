@@ -22,16 +22,17 @@ https://fullstack-chat-app-1nw2.onrender.com
 ---
 ## Demo Users
 #### User 1:
-email: bart@email.com
-password: 123456
+- email: bart@email.com
+- password: 123456
 
 #### User 2:
-email: jerry@email.com
-password: 123456
+- email: jerry@email.com
+- password: 123456
 
-### User3:
-email: bob@email.com
-password: 123456
+#### User3:
+- email: bob@email.com
+- password: 123456
+
 ---
 ## Local development
 ###### Setup .env file
@@ -58,5 +59,5 @@ npm run build
 npm start
 ```
 
-#### Acknowledgement:
+### Acknowledgement:
 This project was inspired by: https://github.com/burakorkmez
