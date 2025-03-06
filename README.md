@@ -33,6 +33,7 @@ https://fullstack-chat-app-1nw2.onrender.com
 - email: bob@email.com
 - password: 123456
 
+##### remark: max size of image upload (including profile pic) is 5MB
 ---
 ## Local development
 ###### Setup .env file
