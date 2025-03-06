@@ -15,12 +15,13 @@ dotenv.config(); // access to the environment variable
 const PORT = process.env.PORT; // using the PORT at .env
 const __dirname = path.resolve();
 
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 app.use(cookieParser());
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true, // allow cookies and authentications to be sent as a request
 }));
+app.use(express.urlencoded({ limit: "5mb", extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);

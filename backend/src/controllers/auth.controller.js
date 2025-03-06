@@ -106,6 +106,13 @@ export const updateProfile = async (req, res) => {
             return res.status(400).json({ message: "Profile pic is required" });
         }
 
+        const fileSizeInBytes = (profilePic.length * (3 / 4)) - 2;
+        const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+
+        if (fileSizeInMB > 5) {
+            return res.status(400).json({ message: "Profile pic must be less than 5MB"});
+        }
+
         const uploadResponse = await cloudinary.uploader.upload(profilePic) // upload into cloudinary bucket for profile pic
         const updatedUser = await User.findByIdAndUpdate(userId, { profilePic: uploadResponse.secure_url }, {new: true})
 
