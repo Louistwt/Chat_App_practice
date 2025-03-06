@@ -1,4 +1,7 @@
 # Full Stack Real-time Chat App
+## Deployment:
+https://fullstack-chat-app-1nw2.onrender.com
+
 ## Features:
 
 - User authentication && authorisation with JWT
@@ -17,7 +20,20 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ---
-## Using the application
+## Demo Users
+#### User 1:
+email: bart@email.com
+password: 123456
+
+#### User 2:
+email: jerry@email.com
+password: 123456
+
+### User3:
+email: bob@email.com
+password: 123456
+---
+## Local development
 ###### Setup .env file
 
 ```
